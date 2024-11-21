@@ -1,9 +1,12 @@
 <template>
     <div class="levelContent">
       <div v-if="level">
-        <h1>{{ level.name }}</h1> 
+        <h2>{{ level.name }}</h2>
         <div v-html="level.content"></div>
-        <button @click="goToNextLevel">next</button>
+        <div>
+          <button @click="goToPreviousLevel">prev</button>
+          <button @click="goToNextLevel">next</button>
+        </div>
     </div>
       <div v-else>
         <p>Level not found.</p>
@@ -20,18 +23,18 @@
   },
   mounted() {
     Prism.highlightAll();
-    
+
   },
-    
+
     props: ['id'],  // Получаем id из маршрута
     computed: {
       currentLevel() {
         return parseInt(this.$route.params.id);
-      
+
     },
       level() {
-        return this.$store.getters.getLevelById; 
-        
+        return this.$store.getters.getLevelById;
+
          // Получаем уровень по ID
       }
     },
@@ -43,7 +46,7 @@
       if (!this.level || this.level.id !== currentLevel) {
         this.$store.dispatch('setLevelById', currentLevel);
       }
-      
+
     },
     watch: {
       // Следим за изменением параметра уровня в URL
@@ -56,9 +59,14 @@
       // Переходим на следующий уровень
       const nextLevel = this.currentLevel + 1;
       location.replace(`/level/${nextLevel}`)
+    },
+    goToPreviousLevel() {
+      // Переходим на следующий уровень
+      const previousLevel = this.currentLevel - 1;
+      location.replace(`/level/${previousLevel}`)
     }
   },
-  
+
 };
   </script>
   <style scoped>
