@@ -18,6 +18,10 @@
       currentLevel: parseInt(this.$route.params.id),
     };
   },
+  mounted() {
+    Prism.highlightAll();
+    
+  },
     
     props: ['id'],  // Получаем id из маршрута
     computed: {
@@ -44,15 +48,14 @@
     watch: {
       // Следим за изменением параметра уровня в URL
       '$route.params.id'(newId) {
-        this.currentLevel = parseInt(newId);
-        location.reload() // Обновляем данные при изменении пути
+        this.currentLevel = parseInt(newId);// Обновляем данные при изменении пути
       },
     },
     methods: {
     goToNextLevel() {
       // Переходим на следующий уровень
       const nextLevel = this.currentLevel + 1;
-      this.$router.push(`/level/${nextLevel}`);
+      location.replace(`/level/${nextLevel}`)
     }
   },
   
