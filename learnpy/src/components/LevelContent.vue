@@ -1,6 +1,10 @@
 <template>
-    <div>
-      <h1 v-if="level">урок {{ level.name }}</h1>
+    <div class="levelContent">
+      <div v-if="level">
+        <h1>{{ level.name }}</h1> 
+        <div v-html="level.content"></div>
+        <button @click="goToNextLevel">next</button>
+    </div>
       <div v-else>
         <p>Level not found.</p>
       </div>
@@ -9,21 +13,57 @@
 
   <script>
   export default {
+    data() {
+    return {
+      currentLevel: parseInt(this.$route.params.id),
+    };
+  },
+    
     props: ['id'],  // Получаем id из маршрута
     computed: {
+      currentLevel() {
+        return parseInt(this.$route.params.id);
+      
+    },
       level() {
-        return this.$store.getters.getLevelById;  // Получаем уровень по ID
+        return this.$store.getters.getLevelById; 
+        
+         // Получаем уровень по ID
       }
     },
     created() {
       // Преобразуем id в число, если он передан как строка в маршруте
-      const levelId = parseInt(this.id, 10);
+      const currentLevel = parseInt(this.id, 10);
 
       // Если уровень еще не загружен в Vuex или не совпадает с переданным ID, загружаем его
-      if (!this.level || this.level.id !== levelId) {
-        this.$store.dispatch('setLevelById', levelId);
+      if (!this.level || this.level.id !== currentLevel) {
+        this.$store.dispatch('setLevelById', currentLevel);
       }
+      
+    },
+    watch: {
+      // Следим за изменением параметра уровня в URL
+      '$route.params.id'(newId) {
+        this.currentLevel = parseInt(newId);
+        location.reload() // Обновляем данные при изменении пути
+      },
+    },
+    methods: {
+    goToNextLevel() {
+      // Переходим на следующий уровень
+      const nextLevel = this.currentLevel + 1;
+      this.$router.push(`/level/${nextLevel}`);
     }
-  }
+  },
+  
+};
   </script>
+  <style scoped>
+  .levelContent {
+    padding: 2vh;
+    padding-top: 10vh;
+  }
+
+
+  </style>
 

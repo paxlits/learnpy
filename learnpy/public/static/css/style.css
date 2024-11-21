@@ -40,10 +40,12 @@ ul {
     display: flex;
     align-items: center;
 }
+p {
+    color: white;
+    font-size: 2vh;
+}
 .list-levels {
-    margin-top: 5vw;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     width: 92vw;
     display: grid;
     grid-template-columns: repeat(1, 90vw);

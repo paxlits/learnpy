@@ -31,7 +31,7 @@
     align-items: center;
   }
   #app {
-    padding-top: 6vh;
+    padding-top: 10vh;
   }
 </style>
 

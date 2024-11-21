@@ -7,6 +7,8 @@
 
 <script>
 import AppHeader from './components/AppHeader.vue'
+import 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css'; 
 export default {
   name: 'App',
   components: {
