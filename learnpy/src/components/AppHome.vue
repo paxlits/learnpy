@@ -30,5 +30,8 @@
     grid-template-columns: 10vw 70vw;
     align-items: center;
   }
+  #app {
+    padding-top: 6vh;
+  }
 </style>
-  
+

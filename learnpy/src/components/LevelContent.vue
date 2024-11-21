@@ -6,7 +6,7 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   export default {
     props: ['id'],  // Получаем id из маршрута
@@ -18,7 +18,7 @@
     created() {
       // Преобразуем id в число, если он передан как строка в маршруте
       const levelId = parseInt(this.id, 10);
-  
+
       // Если уровень еще не загружен в Vuex или не совпадает с переданным ID, загружаем его
       if (!this.level || this.level.id !== levelId) {
         this.$store.dispatch('setLevelById', levelId);
@@ -26,4 +26,4 @@
     }
   }
   </script>
-  
+

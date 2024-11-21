@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 * {
-    font-family: "Montserrat";
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Montserrat";
 }
 body {
     background-color: #2D2B36;
 }
 header {
+    top: 0;
+    width: 100vw;
     height: 6vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #3d3a4a;
+    position: fixed;
 }
 h1 {
     text-align: center;
@@ -28,11 +32,13 @@ ul {
 }
 .header__home-btn {
     border: 0;
+    position: absolute;
     background: transparent;
     width: 5vh;
-    position: absolute;
-    right: 3vw;
+    right: 0vw;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 .list-levels {
     margin-top: 5vw;
