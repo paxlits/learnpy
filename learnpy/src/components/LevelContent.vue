@@ -1,11 +1,11 @@
 <template>
     <div class="levelContent">
       <div v-if="level">
-        <h2>{{ level.name }}</h2>
+        <h2>{{ level.name }}({{ level.id }})</h2>
         <div v-html="level.content"></div>
-        <div>
-          <button @click="goToPreviousLevel">prev</button>
-          <button @click="goToNextLevel">next</button>
+        <div class="btns-nav">
+          <button id="btn-prev" @click="goToPreviousLevel"><img style="rotate: -90deg" src="/static/img/arrow.svg"></button>
+          <button id="btn-next" @click="goToNextLevel"><img style="rotate: 90deg" src="/static/img/arrow.svg"></button>
         </div>
     </div>
       <div v-else>
@@ -18,27 +18,35 @@
   export default {
     data() {
     return {
+      
       currentLevel: parseInt(this.$route.params.id),
+      
     };
   },
   mounted() {
-    Prism.highlightAll();
+    hljs.highlightAll();
+    if (this.currentLevel==1) {
+        document.getElementById("btn-prev").style.display = 'none'
+      }
 
   },
 
     props: ['id'],  // Получаем id из маршрута
     computed: {
+      
       currentLevel() {
+        
         return parseInt(this.$route.params.id);
 
     },
       level() {
         return this.$store.getters.getLevelById;
-
+        
          // Получаем уровень по ID
       }
     },
     created() {
+      
       // Преобразуем id в число, если он передан как строка в маршруте
       const currentLevel = parseInt(this.id, 10);
 
@@ -56,12 +64,10 @@
     },
     methods: {
     goToNextLevel() {
-      // Переходим на следующий уровень
       const nextLevel = this.currentLevel + 1;
       location.replace(`/level/${nextLevel}`)
     },
     goToPreviousLevel() {
-      // Переходим на следующий уровень
       const previousLevel = this.currentLevel - 1;
       location.replace(`/level/${previousLevel}`)
     }
@@ -73,6 +79,9 @@
   .levelContent {
     padding: 2vh;
     padding-top: 10vh;
+  }
+  code.hljs {
+    padding: 0;
   }
 
 
