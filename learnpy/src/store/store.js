@@ -18,15 +18,11 @@ export default createStore({
         content: "<p>Вам нужно выбрать правильный вариант, как сделать вывод операции 5+2 и слова йоу</p>",
         options: [
               { label: 'print(5+2), print("йоу")', value: 'wrong' },
-              { label: 'print(5+2)\nprint("йоу")', value: 'correct' }, // Правильный ответ
               { label: 'print(5+2), print(йоу)', value: 'wrong' },
+              { label: 'print(5+2)\nprint("йоу")', value: 'correct' }, // Правильный ответ
               { label: 'print("5+2")\nprint("йоу")', value: 'wrong' }
         ],
-      selectedAnswer: null,
-      resultMessage: ''
       }
-
-      // Добавьте другие уровни
     ],
     currentLevel: null,
   },
@@ -36,7 +32,6 @@ export default createStore({
     }
   },
   actions: {
-    // Действие для получения уровня по ID
     setLevelById({ commit, state }, id) {
       const level = state.levels.find(level => level.id === id);
       commit('setCurrentLevel', level);

@@ -17,6 +17,14 @@ header {
     background-color: #3d3a4a;
     position: fixed;
 }
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+input[type="radio"]:focus + label > pre > code {
+    transition: background-color 0.25s ease;
+    background-color: #999;
+  }
 h1 {
     text-align: center;
     color: white;
