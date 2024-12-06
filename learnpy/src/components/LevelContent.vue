@@ -105,9 +105,6 @@
 };
   </script>
   <style scoped>
-  input:active + label > pre > code {
-    background-color: #ccc;
-  }
   input:focus + label > pre > code {
     transition: background-color 0.5s ease;
     background-color: #999;
