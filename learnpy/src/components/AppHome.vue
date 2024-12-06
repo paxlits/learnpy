@@ -1,14 +1,14 @@
 
 <template>
     <div id="app">
-            <ul class = "list-levels">
-                <li v-for="level in levels" :key="level.id" class="in-future">
-                    <router-link :to="{ name: 'LevelContent', params: { id: level.id } }">
-                        <p>{{ level.id }}</p>
-                        <p>{{ level.name }}</p>
-                    </router-link>
-                </li>
-            </ul>
+        <ul class = "list-levels">
+          <li v-for="level in levels" :key="level.id" class="in-future">
+            <router-link :to="{ name: 'LevelContent', params: { id: level.id } }">
+              <p>{{ level.id }}</p>
+              <p>{{ level.name }}</p>
+            </router-link>
+          </li>
+        </ul>
   </div>
   </template>
   <script>
@@ -20,6 +20,7 @@
     }
   }
   </script>
+
   <style scoped>
   a {
     color: white;

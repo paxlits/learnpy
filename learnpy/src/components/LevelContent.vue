@@ -2,31 +2,34 @@
     <div id="app">
       <div v-if="level">
         <h2>{{ level.name }}({{ level.id }})</h2>
-        <div v-html="level.content"></div>
+        <img v-if="level.img != null" :src="level.img">
+        <p>{{ level.text }}</p>
+        <pre v-if="level.code != null"><code class="python">{{ level.code }}</code></pre>
+        <p>{{ level.text2 }}</p>
         <div v-if="level.options">
-        <h2>Выберите правильный ответ:</h2>
-        <div v-for="(option, index) in level.options" :key="index">
+          <h2>Выберите правильный ответ:</h2>
+          <div v-for="(option, index) in level.options" :key="index">
             <input
                 @change="updateSelectedAnswer(option.value)"
                 type="radio"
                 :value="option.value"
                 :id="'option' + index"
                 name="quiz_option"
-              
                 />
             <label :for="'option' + index"><pre><code class="python">{{ option.label }}</code></pre></label>
         </div>
         <button style="margin-top:0vh;width: 100%;padding: 10px 0px;border-radius: 8px;margin-bottom: 15px;" @click="checkAnswer">Проверить ответ</button>
-      </div>
         <p v-if="resultMessage">{{ resultMessage }}</p>
-        <div class="btns-nav">
-          <button id="btn-prev" @click="goToPreviousLevel"><img style="rotate: -90deg" src="/static/img/arrow.svg"></button>
-          <button id="btn-next" @click="goToNextLevel"><img style="rotate: 90deg" src="/static/img/arrow.svg"></button>
-        </div>
+      </div>
+        
     </div>
       <div v-else>
         <p>Level not found.</p>
       </div>
+      <div class="btns-nav">
+          <button id="btn-prev" @click="goToPreviousLevel"><img style="rotate: -90deg" src="/static/img/arrow.svg"></button>
+          <button id="btn-next" @click="goToNextLevel"><img style="rotate: 90deg" src="/static/img/arrow.svg"></button>
+        </div>
     </div>
   </template>
 
@@ -41,12 +44,19 @@
   },
   mounted() {
     this.highlightCode();
-    if (this.currentLevel==1) {
-      document.getElementById("btn-prev").style.display = 'none'
+    if (this.currentLevel === 1) {
+        document.getElementById("btn-prev").style.display = 'none';
+    } else {
+        document.getElementById("btn-prev").style.display = 'block';
     }
   },
   updated() {
     this.highlightCode();
+    if (this.currentLevel === 1) {
+        document.getElementById("btn-prev").style.display = 'none';
+    } else {
+        document.getElementById("btn-prev").style.display = 'block';
+    }
   },
 
     props: ['id'],  // Получаем id из маршрута
@@ -69,6 +79,7 @@
        this.currentLevel = parseInt(newId);
        this.fetchLevelData();
       }
+      
     },
     methods: {
     highlightCode() {
@@ -100,16 +111,11 @@
       }
     }
   },
-
 };
   </script>
   <style scoped>
-
   #app {
     padding: 2vh;
     padding-top: 10vh;
   }
-
-
   </style>
-
