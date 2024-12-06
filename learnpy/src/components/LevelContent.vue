@@ -16,7 +16,7 @@
                 />
             <label :for="'option' + index"><pre><code class="python">{{ option.label }}</code></pre></label>
         </div>
-        <button style="margin-top:0vh;width: 100%;padding: 10px 0px;border-radius: 8px;transform: translateX(-50%);margin-left: calc(50vw - 2vh);margin-bottom: 15px;" @click="checkAnswer">Проверить ответ</button>
+        <button style="margin-top:0vh;width: 100%;padding: 10px 0px;border-radius: 8px;margin-bottom: 15px;" @click="checkAnswer">Проверить ответ</button>
       </div>
         <p v-if="resultMessage">{{ resultMessage }}</p>
         <div class="btns-nav">
@@ -43,10 +43,14 @@
   },
   mounted() {
     hljs.highlightAll();
+    this.highlightCode();
     if (this.currentLevel==1) {
         document.getElementById("btn-prev").style.display = 'none'
       }
 
+  },
+  updated() {
+    this.highlightCode();
   },
 
     props: ['id'],  // Получаем id из маршрута
@@ -65,6 +69,7 @@
     },
     created() {
       
+      
       // Преобразуем id в число, если он передан как строка в маршруте
       const currentLevel = parseInt(this.id, 10);
 
@@ -75,19 +80,28 @@
 
     },
     watch: {
-      // Следим за изменением параметра уровня в URL
       '$route.params.id'(newId) {
-        this.currentLevel = parseInt(newId);// Обновляем данные при изменении пути
-      },
+       this.currentLevel = parseInt(newId);
+       this.fetchLevelData();
+      }
     },
     methods: {
+    highlightCode() {
+     this.$nextTick(() => {
+     hljs.highlightAll();
+       });
+     },
+    fetchLevelData() {
+     const currentLevel = this.currentLevel;
+     this.$store.dispatch('setLevelById', currentLevel);
+    },
     goToNextLevel() {
       const nextLevel = this.currentLevel + 1;
-      location.replace(`/level/${nextLevel}`)
+      this.$router.push({ path: `/level/${nextLevel}`});
     },
     goToPreviousLevel() {
       const previousLevel = this.currentLevel - 1;
-      location.replace(`/level/${previousLevel}`)
+      this.$router.push({ path: `/level/${previousLevel}`});
     },
     updateSelectedAnswer(answer) {
         this.selectedAnswer = answer; // Обновляем выбранный ответ
@@ -106,7 +120,7 @@
   </script>
   <style scoped>
   input:focus + label > pre > code {
-    transition: background-color 0.5s ease;
+    transition: background-color 0.25s ease;
     background-color: #999;
   }
   input {
