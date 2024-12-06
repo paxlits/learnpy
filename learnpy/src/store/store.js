@@ -17,10 +17,10 @@ export default createStore({
         name: 'Первое задание',
         content: "<p>Вам нужно выбрать правильный вариант, как сделать вывод операции 5+2 и слова йоу</p>",
         options: [
-              { label: 'print(1+3), print("йоу")', value: 'wrong' },
-              { label: 'print(1+3)\nprint("йоу")', value: 'correct' }, // Правильный ответ
-              { label: 'print(1+3), print(йоу)', value: 'wrong' },
-              { label: 'print("1+3")\nprint("йоу")', value: 'wrong' }
+              { label: 'print(5+2), print("йоу")', value: 'wrong' },
+              { label: 'print(5+2)\nprint("йоу")', value: 'correct' }, // Правильный ответ
+              { label: 'print(5+2), print(йоу)', value: 'wrong' },
+              { label: 'print("5+2")\nprint("йоу")', value: 'wrong' }
         ],
       selectedAnswer: null,
       resultMessage: ''
