@@ -2,6 +2,7 @@
 * {
   -webkit-tap-highlight-color: transparent;
   font-family: "Montserrat";
+  outline: none;
 }
 body {
     background-color: #2D2B36;
@@ -54,12 +55,74 @@ ul {
     margin: 1vw;
     padding: 1vw;
 }
+.username_profile {
+    font-size: 8vw;
+}
+
+.avatar_profile {
+    width: 50vw;
+    height: 50vw;
+    margin: 10px auto;
+    border: 4px solid #595959;
+    border-radius: 50%;
+}
+.info_profile {
+    background-color: #1c1b22;
+    text-align: center;
+    margin: 3px auto;
+    width: 140px;
+    border: #484555 1px solid;
+    font-size: 13px;
+    padding: 4px 8px;
+}
+.profile-input {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid black;
+}
+.create-account {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    gap: 5vh;
+    border-radius: 1vh;
+    margin: 0 auto;
+    transform: translate(0, -50%);
+    margin-top: 40vh;
+}
+.create-account > input {
+    color: #b5bec7;
+    font-weight: 600;
+    width: 304px;
+}
+.create-account > h2 {
+    width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+.create-account > button {
+    width: 250px;
+    padding: 10px 0;
+    border-radius: 8px;
+}
 .header__home-btn {
     border: 0;
     position: absolute;
     background: transparent;
     width: 5vh;
     right: 0vw;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.header__profile-btn {
+    border: 0;
+    position: absolute;
+    background: transparent;
+    width: 5vh;
+    left: 0vw;
     cursor: pointer;
     display: flex;
     align-items: center;

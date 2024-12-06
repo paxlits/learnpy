@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AppHome from '@/components/AppHome.vue';
 import LevelContent from '@/components/LevelContent.vue';
+import AppProfile from '@/components/AppProfile.vue'
 const routes = [
     {
         path: '/',
@@ -13,6 +14,11 @@ const routes = [
         component: LevelContent,
         props: true // Передаем параметры маршрута как пропсы в компонент
       },
+      {
+        path: '/profile',
+        name: 'Profile',
+        component: AppProfile
+      }
     ]
 
 

@@ -3,6 +3,22 @@
       <div v-if="level">
         <h2>{{ level.name }}({{ level.id }})</h2>
         <div v-html="level.content"></div>
+        <div v-if="level.options">
+        <h2>Выберите правильный ответ:</h2>
+        <div v-for="(option, index) in level.options" :key="index">
+            <input
+                @change="updateSelectedAnswer(option.value)"
+                type="radio"
+                :value="option.value"
+                :id="'option' + index"
+                name="quiz_option"
+              
+                />
+            <label :for="'option' + index"><pre><code class="python">{{ option.label }}</code></pre></label>
+        </div>
+        <button style="margin-top:0vh;width: 100%;padding: 10px 0px;border-radius: 8px;transform: translateX(-50%);margin-left: calc(50vw - 2vh);margin-bottom: 15px;" @click="checkAnswer">Проверить ответ</button>
+      </div>
+        <p v-if="resultMessage">{{ resultMessage }}</p>
         <div class="btns-nav">
           <button id="btn-prev" @click="goToPreviousLevel"><img style="rotate: -90deg" src="/static/img/arrow.svg"></button>
           <button id="btn-next" @click="goToNextLevel"><img style="rotate: 90deg" src="/static/img/arrow.svg"></button>
@@ -18,7 +34,9 @@
   export default {
     data() {
     return {
-      
+      selectedAnswer: null,
+      resultMessage: '',
+    
       currentLevel: parseInt(this.$route.params.id),
       
     };
@@ -70,18 +88,37 @@
     goToPreviousLevel() {
       const previousLevel = this.currentLevel - 1;
       location.replace(`/level/${previousLevel}`)
-    }
+    },
+    updateSelectedAnswer(answer) {
+        this.selectedAnswer = answer; // Обновляем выбранный ответ
+    },
+    checkAnswer() {
+      if (this.selectedAnswer === 'correct') {
+        this.resultMessage = 'Правильный ответ!';
+        
+      } else {
+        this.resultMessage = 'Попробуйте снова.';
+      }
+        }
   },
 
 };
   </script>
   <style scoped>
+  input:active + label > pre > code {
+    background-color: #ccc;
+  }
+  input:focus + label > pre > code {
+    transition: background-color 0.5s ease;
+    background-color: #999;
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+  }
   .levelContent {
     padding: 2vh;
     padding-top: 10vh;
-  }
-  code.hljs {
-    padding: 0;
   }
 
 
