@@ -23,10 +23,10 @@ export default createStore({
         name: 'Первое задание',
         text: "Вам нужно выбрать вариант где на экран выведет результат 5+2 и слово йоу",
         options: [
-              { label: 'print(5+2), print("йоу")', value: 'wrong' },
-              { label: 'print(5+2), print(йоу)', value: 'wrong' },
-              { label: 'print(5+2)\nprint("йоу")', value: 'correct' }, // Правильный ответ
-              { label: 'print("5+2")\nprint("йоу")', value: 'wrong' }
+              { label: 'print(5+2), print("йоу")', value: false },
+              { label: 'print(5+2), print(йоу)', value: false },
+              { label: 'print(5+2)\nprint("йоу")', value: true },
+              { label: 'print("5+2")\nprint("йоу")', value: false }
         ],
       },
       {
@@ -35,8 +35,8 @@ export default createStore({
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmubOn7sfXN_YFy2aQlSO2X2pZKuOI-em9BA&s",
         text: "кирил чмо",
         options: [
-          { label: "кирилл чмо", value: 'correct'},
-          { label: "кирилл норм", value: 'wrong'}
+          { label: "кирилл чмо", value: true},
+          { label: "кирилл норм", value: false}
         ]
       }
     ],

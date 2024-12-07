@@ -25,6 +25,9 @@ input[type="radio"]:focus + label > pre > code {
     transition: background-color 0.25s ease;
     background-color: #999;
   }
+code {
+    border-radius: 8px;
+}
 h1 {
     text-align: center;
     color: white;

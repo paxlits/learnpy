@@ -18,7 +18,7 @@
                 />
             <label :for="'option' + index"><pre><code class="python">{{ option.label }}</code></pre></label>
         </div>
-        <button style="margin-top:0vh;width: 100%;padding: 10px 0px;border-radius: 8px;margin-bottom: 15px;" @click="checkAnswer">Проверить ответ</button>
+        <button style="margin-top:0vh;width: 100%;padding: 10px 0px;border-radius: 8px;margin-bottom: 15px;" @click="checkAnswer">Ответить</button>
         <p v-if="resultMessage">{{ resultMessage }}</p>
       </div>
         
@@ -103,7 +103,7 @@
         this.selectedAnswer = answer; // Обновляем выбранный ответ
     },
     checkAnswer() {
-      if (this.selectedAnswer === 'correct') {
+      if (this.selectedAnswer === true) {
         this.resultMessage = "верно"
         
       } else {
